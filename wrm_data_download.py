@@ -11,14 +11,14 @@ bike_data_api = "https://api.nextbike.net/maps/nextbike-live.json"
 Path("logs").mkdir(exist_ok=True)
 logging.basicConfig(filename="logs/collector.log",
                     level=logging.INFO,
-                    format="%(asctime)s [%(levelname)s] %(message)s")
+                    format="[WRM] %(asctime)s[%(levelname)s] %(message)s")
 
 def main():
     try:
         raw = collect_data(bike_data_api, {"city": 148})
         processed = process_wrm_data(raw)
-        filename_raw = f"data/{datetime.now():%Y-%m-%d_%H-%M}_raw.csv"
-        filename_processed = f"data/processed_data.csv"
+        filename_raw = f"data/wrm/wrm_{datetime.now():%Y-%m-%d_%H-%M}_raw.csv"
+        filename_processed = f"data/processed_wrm_data.csv"
         save_to_csv(raw, filename_raw)
         append_to_csv(filename_processed, processed)
         logging.info("Dane zebrane pomyślnie.")
