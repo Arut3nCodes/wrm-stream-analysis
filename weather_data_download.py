@@ -21,7 +21,6 @@ logging.basicConfig(filename="logs/collector.log",
 def main():
     try:
         raw = collect_data(weather_data_api, {"lat": lat, "lon": lon, "appid": API_KEY, "units": "metric"})
-        print(raw)
         processed = process_owa_data(raw)
         filename_raw = f"data/owa/owa_{datetime.now():%Y-%m-%d_%H-%M}_raw.csv"
         filename_processed = f"data/owa_processed_data.csv"
